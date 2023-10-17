@@ -3,16 +3,16 @@ import React, { useState } from 'react';
 const UseStateCounter = () => {
   let [value, setValue] = useState(0);
 
-  const decrease = () => {
-    setValue(value--);
+  const complexIncrease = () => {
+    setTimeout(()=>{
+      setValue((prevState) => {
+        return prevState + 1;
+      });
+    }, 1500);
   };
 
   const reset = () => {
     setValue(0);
-  };
-
-  const increase = () => {
-    setValue(value++);
   };
 
   return (
@@ -21,7 +21,7 @@ const UseStateCounter = () => {
         <h2>regular counter</h2>
         <h1>{value}</h1>
 
-        <button className='btn' onClick={decrease}>
+        <button className='btn' onClick={() => setValue(value--)}>
           Decrease
         </button>
 
@@ -29,8 +29,16 @@ const UseStateCounter = () => {
           Reset
         </button>
 
-        <button className='btn'  onClick={increase}>
+        <button className='btn'  onClick={() => setValue(value++)}>
           Increase
+        </button>
+      </section>
+      <section style={{margin: '4rem 0'}}>
+        <h2>complex counter</h2>
+        <h1>{value}</h1>
+
+        <button className='btn' onClick={complexIncrease}>
+          increase later
         </button>
       </section>
     </>
